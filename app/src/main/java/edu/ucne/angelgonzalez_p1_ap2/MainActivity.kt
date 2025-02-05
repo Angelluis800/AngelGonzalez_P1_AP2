@@ -22,6 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AngelGonzalez_P1_AP2Theme {
 
+
             }
         }
     }
