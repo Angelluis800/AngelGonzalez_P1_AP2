@@ -4,5 +4,8 @@ import kotlinx.serialization.Serializable
 
 sealed class Screen {
     @Serializable
-    data object Home : Screen()
+    data object SistemaList : Screen()
+
+    @Serializable
+    data class Sistema(val sistemaId: Int) : Screen()
 }
