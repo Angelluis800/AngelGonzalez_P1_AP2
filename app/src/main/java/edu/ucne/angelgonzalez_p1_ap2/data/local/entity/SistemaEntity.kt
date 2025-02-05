@@ -3,8 +3,9 @@ package edu.ucne.angelgonzalez_p1_ap2.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Entities")
-data class Entity (
+@Entity(tableName = "Sistemas")
+data class SistemaEntity (
     @PrimaryKey
-    val entityId: Int? = null
+    val sistemaId: Int? = null,
+    val nombre: String = ""
 )
