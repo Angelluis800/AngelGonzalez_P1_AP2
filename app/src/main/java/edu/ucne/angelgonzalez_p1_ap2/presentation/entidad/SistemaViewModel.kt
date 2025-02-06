@@ -40,6 +40,18 @@ class SistemaViewModel @Inject constructor(
         }
     }
 
+    fun onPrecioChange(precio: String) {
+        _uiState.update {
+            val precioDouble = precio.toDoubleOrNull()
+            it.copy(
+                precio = precio,
+                errorMessage = if (precioDouble == null || precioDouble < 0)
+                    "El precio debe ser un número válido"
+                else null
+            )
+        }
+    }
+
 
     fun new() {
         _uiState.value = SistemaUiState()
@@ -96,5 +108,6 @@ class SistemaViewModel @Inject constructor(
 
 fun SistemaUiState.toEntity() = SistemaEntity(
     sistemaId = this.sistemaId,
-    nombre = this.nombre
+    nombre = this.nombre,
+    precio = precio
 )
