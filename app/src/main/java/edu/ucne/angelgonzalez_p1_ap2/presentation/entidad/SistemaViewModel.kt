@@ -42,16 +42,17 @@ class SistemaViewModel @Inject constructor(
 
     fun onPrecioChange(precio: String) {
         _uiState.update {
-            val precioDouble = precio.toDoubleOrNull()
             it.copy(
                 precio = precio,
-                errorMessage = if (precioDouble == null || precioDouble < 0)
-                    "El precio debe ser un número válido"
-                else null
+                errorMessage = when {
+                    precio.isBlank() -> "El precio no puede estar vacío"
+                    precio.toDoubleOrNull() == null -> "El precio debe ser un número válido" // ✅ Bloquea texto inválido
+                    precio.toDouble() < 0 -> "El precio debe ser mayor a 0"
+                    else -> null
+                }
             )
         }
     }
-
 
     fun new() {
         _uiState.value = SistemaUiState()
@@ -81,7 +82,8 @@ class SistemaViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             sistemaId = sistema.sistemaId,
-                            nombre = sistema.nombre
+                            nombre = sistema.nombre,
+                            precio = sistema.precio.toString()
                         )
                     }
                 }
@@ -89,25 +91,28 @@ class SistemaViewModel @Inject constructor(
         }
     }
 
+
     fun isValid(): Boolean {
         val nombreValid = _uiState.value.nombre.isNotBlank()
+        val precioValid = _uiState.value.precio.toDoubleOrNull() != null // ✅ Evita que se guarde si no es un número
 
         _uiState.update {
             it.copy(
                 errorMessage = when {
                     !nombreValid -> "Debes rellenar el campo Nombre"
+                    !precioValid -> "El precio debe ser un número válido"
                     else -> null
                 }
             )
         }
-
-        return nombreValid
+        return nombreValid && precioValid
     }
+
 
 }
 
 fun SistemaUiState.toEntity() = SistemaEntity(
     sistemaId = this.sistemaId,
     nombre = this.nombre,
-    precio = precio
+    precio = this.precio.toDoubleOrNull() ?: 0.0
 )
