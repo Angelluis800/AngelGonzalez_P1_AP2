@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ConfirmDeletionDialog(
+fun ConfirmDeleting(
     openDialog: MutableState<Boolean>,
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
