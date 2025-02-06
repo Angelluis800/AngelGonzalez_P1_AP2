@@ -105,6 +105,12 @@ fun SistemaHeaderRow() {
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
+            Text(
+                modifier = Modifier.weight(2f),
+                text = "Precio",
+                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
         }
     }
 }
@@ -138,6 +144,11 @@ private fun SistemaRow(
             Text(
                 modifier = Modifier.weight(2f),
                 text = it.nombre,
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                modifier = Modifier.weight(1f),
+                text = "$${it.precio}",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
