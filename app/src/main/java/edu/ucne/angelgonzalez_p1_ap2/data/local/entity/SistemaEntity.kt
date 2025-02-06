@@ -8,5 +8,5 @@ data class SistemaEntity(
     @PrimaryKey
     val sistemaId: Int? = null,
     val nombre: String = "",
-    val precio: String = ""
+    val precio: Double = 0.0
 )
